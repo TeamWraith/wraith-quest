@@ -28,7 +28,6 @@ public class AppGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				// TODO Auto-generated method stub
 				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
 			        try {
@@ -55,10 +54,6 @@ public class AppGUI {
 	}
 	
 	public static void findQuestTask(String password) {
-		// DEBUG:
-		System.out.println("===findQuestTask===");
-		System.out.println("Password given by user: " + password);
-
 		// Array of all activated quests.
 		refresh(password);
 	}
@@ -130,14 +125,10 @@ public class AppGUI {
 	}
 	
 	public static void refreshQuestList(String[] quests, GUIBuild gui) {
-		System.out.println("===refreshQuestList===");
-		System.out.println("Tried to refresh quest list w/:\n" + quests);
 		gui.getQuestList().setListData(quests);
 	}
 
 	public static void refreshTaskList(String[] tasks, GUIBuild gui) {
-		System.out.println("===refreshTaskList===");
-		System.out.println("tasks array is"+(tasks == null ? " " : " not ")+"null");
 		gui.getTaskList().setListData(tasks);
 	}
 	

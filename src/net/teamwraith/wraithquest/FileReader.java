@@ -45,24 +45,20 @@ public class FileReader {
 	}
 	
 	private static Quest readFile (String filename){
-		assert (filename.endsWith(".quest")) : "Not a quest file, son!";
-		System.out.println("===readFile===");
-		
 		File file = new File(filename);
 		
 		try {
 			reader = new Scanner(file);
 		} catch (FileNotFoundException e) {
 			System.out.println("File @ error: "+file.getName() + " @ path "+file.getAbsolutePath() + "\n");
-			e.printStackTrace(); // TODO Later, print an error in the gui or some crap, I dunno.
+			e.printStackTrace(); // TODO Later, print an error in the gui
 		}
 		
-		String type = reader.nextLine(); // every file starts with the type
+		String type = reader.nextLine(); // every file starts with the type, e.g. quest
 		
 		System.out.println(type);
 		
 		if (type.contains("quest")){
-			System.out.println("Reading quest file...");
 			return readQuestFile(new Quest());
 		}else if (type.contains("cutscene")){
 			return readCutsceneFile(new Quest());
@@ -74,8 +70,6 @@ public class FileReader {
 	}
 	
 	private static Quest readQuestFile (Quest quest) {
-		System.out.println("===readQuestFile===");
-		
 		boolean taskPoints = false;
 		List<Task> tasks = new ArrayList<Task>();
 		
@@ -85,7 +79,6 @@ public class FileReader {
 			
 			if (line.contains("tasks={")) {
 				taskPoints = true;
-				System.out.println("Reading tasks.");
 				continue;
 			}
 			
@@ -100,9 +93,8 @@ public class FileReader {
 				quest.setName(line.substring(5));
 			else if (line.startsWith("description=")){
 				String description = line.substring(12);
-				// HTML parsing.
+				// Parsing paragraphs.
 				description = description.replaceAll("<p>", "\n\n");
-				description = description.replaceAll("<secret>", "\n<(ü)>\n   | |\n");
 				quest.setDescription(description);
 			}
 			
