@@ -3,6 +3,8 @@ package net.teamwraith.wraithquest;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +30,30 @@ public class AppGUI {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-			    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-			        try {
+				Desktop desktop = Desktop.getDesktop();
+			    if (desktop != null && 
+			    	desktop.isSupported(Desktop.Action.BROWSE) && 
+			    	!gui.getButtonLink().getText().isEmpty()) {
+			     
+			    	try {
+			    		// Opens the link. Will not open the file browser if the field is empty.
 			            desktop.browse(new URI(gui.getButtonLink().getText()));
 			        } catch (Exception e) {
 			            e.printStackTrace();
 			        }
+			    	
 			    }
 			}
 			
+		});
+		
+		// Passwordfield's functions
+		gui.getFieldPassword().addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					refresh(gui.getFieldPassword().getText());
+				}
+			}
 		});
 	}
 
@@ -51,11 +67,6 @@ public class AppGUI {
 		}
 		
 		return taskPoints;
-	}
-	
-	public static void findQuestTask(String password) {
-		// Array of all activated quests.
-		refresh(password);
 	}
 
 	public static void redirect(String questName) {
@@ -79,7 +90,7 @@ public class AppGUI {
 		refreshQuestList(activatedQuests
 				.toArray( new String[ activatedQuests.size() ] ), gui);
 		refreshTaskList(taskpoints
-				.toArray( new String[ taskpoints.size() ] ), gui);
+				.toArray( new String[ taskpoints.size() ] ), gui, quest.getCurrentTask());
 		refreshDescription(quest, gui);
 		
 		gui.getFieldName().setText(quest.getName());
@@ -118,6 +129,7 @@ public class AppGUI {
 					}
 				}
 				
+				quest.setCurrentTask(quest.getCurrentTask()+1);
 				redirect(i, taskpoints, quest);
 				break;
 			}
@@ -128,8 +140,13 @@ public class AppGUI {
 		gui.getQuestList().setListData(quests);
 	}
 
-	public static void refreshTaskList(String[] tasks, GUIBuild gui) {
-		gui.getTaskList().setListData(tasks);
+	public static void refreshTaskList(String[] tasks, GUIBuild gui, int questpoint) {
+		String[] t = new String[tasks.length];
+		System.out.println("amount of tasks: "+tasks.length);
+		
+		t[0] = tasks[0];
+		
+		gui.getTaskList().setListData(t);
 	}
 	
 	public static void refreshDescription(Quest quest, GUIBuild gui){

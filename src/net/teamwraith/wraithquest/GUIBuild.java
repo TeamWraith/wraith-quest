@@ -29,7 +29,6 @@ import javax.swing.JScrollPane;
 
 public class GUIBuild extends JFrame {
 	
-//	Serializable.
 	private static final long serialVersionUID = 1188114603961808680L;
 	
 //	Self-explanatory.
@@ -187,12 +186,12 @@ public class GUIBuild extends JFrame {
 		fieldDescription = new JTextArea(10,50);
 		fieldDescription.setEditable(false);
 		fieldDescription.setLineWrap(true);
-		// Makes it wrap around words.
 		fieldDescription.setWrapStyleWord(true);
 		
 		listTasks = new JList<Object>();
 		listTasks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+		// unreadable
 		GroupLayout gl_infoPanel = new GroupLayout(infoPanel);
 		gl_infoPanel
 				.setHorizontalGroup(gl_infoPanel
@@ -241,21 +240,15 @@ public class GUIBuild extends JFrame {
 								Short.MAX_VALUE).addContainerGap()));
 		infoPanel.setLayout(gl_infoPanel);
 		contentPane.setLayout(gl_contentPane);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, infoPanel, lblQuests, lblPassword, lblLink, buttonLink, fieldPassword}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{
+			contentPane, infoPanel, lblQuests, lblPassword, lblLink, buttonLink, fieldPassword
+		}));
 		
 		// CompleteQuestlist's functions, mainly to read completed quests.
+		// TODO Make it do something...
 		listCompleteQuests
-				.addListSelectionListener(new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent event) {}
-				});
-
-		// Passwordfield's functions
-		fieldPassword.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					AppGUI.findQuestTask(gui.getFieldPassword().getText());
-				}
-			}
-		});
+			.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent event) {}
+			});
 	}	
 }

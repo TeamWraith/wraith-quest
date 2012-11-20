@@ -56,8 +56,6 @@ public class FileReader {
 		
 		String type = reader.nextLine(); // every file starts with the type, e.g. quest
 		
-		System.out.println(type);
-		
 		if (type.contains("quest")){
 			return readQuestFile(new Quest());
 		}else if (type.contains("cutscene")){
@@ -75,7 +73,6 @@ public class FileReader {
 		
 		while (reader.hasNext()){
 			String line = reader.nextLine();
-			System.out.println(line);
 			
 			if (line.contains("tasks={")) {
 				taskPoints = true;
@@ -101,8 +98,10 @@ public class FileReader {
 			if (taskPoints){
 				String[] parameters = line.split("#");
 				if (parameters.length == 2){
+					System.out.println("Added task: "+parameters[0]);
 					tasks.add(new Task(parameters[0],parameters[1]));
 				}else{
+					System.out.println("Added task: "+parameters[1]);
 					tasks.add(new Task(parameters[0],parameters[1],parameters[2]));
 				}
 			}
