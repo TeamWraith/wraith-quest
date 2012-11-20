@@ -6,9 +6,7 @@ import java.io.File;
 public class WraithQuest {
 	
 	public static void main(String[] args) {
-		
 		FileReader.fileLister();
-		System.out.println("File reader: " + FileReader.getQuests());
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -19,8 +17,6 @@ public class WraithQuest {
 				}
 			}
 		});
-		
-		
 		
 	}
 	

@@ -51,7 +51,7 @@ public class FileReader {
 			reader = new Scanner(file);
 		} catch (FileNotFoundException e) {
 			System.out.println("File @ error: "+file.getName() + " @ path "+file.getAbsolutePath() + "\n");
-			e.printStackTrace(); // TODO Later, print an error in the gui
+			e.printStackTrace(); // TODO Later, print an error in the gui so the user knows what to report.
 		}
 		
 		String type = reader.nextLine(); // every file starts with the type, e.g. quest
