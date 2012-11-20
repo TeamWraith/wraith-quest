@@ -14,7 +14,7 @@ A completely cross-platform quest logger primarily for Minecraft custom maps.
 Currently, writing quests isn't very intuitive. In later builds, there will be more options for making this process easier.
 For now, it follows this format:
 
-	type=The type of quest. Currently the three types are *quest*, *cutscene* and *character*.
+	type=The type of quest. Currently the three types are quest, cutscene and character.
 	name=The name of the quest.
 	description=The description for the quest on a single line. This is subject to change. For paragraphing, add <p>.
 
@@ -24,7 +24,7 @@ This is where all the task points will be written, in the following format.
 		Link#Description of the task point; this is what will appear in the task list#Password
 	}
 
-There can be an infinite amount of task points, all contained within the *tasks* block. The elements are separated by the hashtag (*#*).
+There can be an infinite amount of task points, all contained within the tasks block. The elements are separated by the hashtag (#).
 Keep in mind that the link is entirely optional, and if you only include two elements, they will be read like so:
 
 	Description#Password
@@ -39,7 +39,7 @@ An example of a quest:
 	www.youtube.com/v?=EXAMPLE#Deliver them to the farmer.#pear
 	}
 
-More examples can be found in the *quests* folder.
+More examples can be found in the quests folder.
 
 ## CONTACT
 
