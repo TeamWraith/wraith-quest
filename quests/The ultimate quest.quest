@@ -1,0 +1,9 @@
+type=quest
+name=Quest o' 'em popcorn machines!
+description=The evil popcorn man-dude is going to kill you!
+tasks={
+www.youtube.com/v?=derp#Kill the man-dude!#popcorn1
+www.youtube.com/v?=derp#Eat the popcorn!#popcorn2
+www.youtube.com/v?=derp#Steal the machine!!#popcorn3
+www.youtube.com/v?=derp#Escape!#popcorn4
+}

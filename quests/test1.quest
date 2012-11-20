@@ -1,0 +1,6 @@
+type=quest
+name=A Royal Death PART 1
+description=The king has died or something along those lines! Oh no! D:
+tasks={
+http://youtu.be/epyF5BSdH2Y#Fight the monsturs, maaan!#a
+}
