@@ -4,6 +4,9 @@
 * Grey out quests/tasks that are completed.
 * Fix the hyperlink's layout.
 
+# 0.1.2 - 21/11/2012
+* Tasks fixed
+
 # 0.1.1 - 20/11/2012
 * Added basic but buggy functionality for task points; currently it only displays one.
 
