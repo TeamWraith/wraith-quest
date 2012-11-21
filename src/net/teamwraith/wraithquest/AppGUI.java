@@ -80,25 +80,21 @@ public class AppGUI {
 		}
 	}
 
-	public static void redirect(int index, List<String> taskpoints, Quest quest) {
+	public static void redirect(int index, Quest quest) {
 		gui.getQuestList().setSelectedIndex(index);
-		refreshAll(taskpoints, quest);
+		refreshAll(quest);
 	}
 	
-	public static void refreshAll(List<String> taskpoints, Quest quest){
-		
+	public static void refreshAll(Quest quest){
 		refreshQuestList(activatedQuests
 				.toArray( new String[ activatedQuests.size() ] ), gui);
-		refreshTaskList(taskpoints
-				.toArray( new String[ taskpoints.size() ] ), gui, quest.getCurrentTask());
+		refreshTaskList(quest, gui);
 		refreshDescription(quest, gui);
 		
 		gui.getFieldName().setText(quest.getName());
 	}
 
 	public static void refresh(String password){
-		List<String> taskpoints = new ArrayList<String>();
-		
 		int i = 0;
 		for (Quest quest : FileReader.getQuests()) {
 			i++;
@@ -112,8 +108,6 @@ public class AppGUI {
 					task.setState(TaskState.ACTIVATED);
 					System.out.println("Current task added: "
 							+ task.getTaskPoint());
-					// u2022 = bullet point
-					taskpoints.add("\u2022 " + task.getTaskPoint());
 				}
 
 				// If quest hasn't started, i.e. current task = 0.
@@ -122,15 +116,13 @@ public class AppGUI {
 				}
 
 				if (quest.getState() == QuestState.STARTED) {
-					System.out.println("Activated name of quest: "
-							+ quest.getName());
 					if (!activatedQuests.contains(quest.getName())){
 						activatedQuests.add(quest.getName());
 					}
 				}
 				
 				quest.setCurrentTask(quest.getCurrentTask()+1);
-				redirect(i, taskpoints, quest);
+				redirect(i,quest);
 				break;
 			}
 		}
@@ -140,11 +132,12 @@ public class AppGUI {
 		gui.getQuestList().setListData(quests);
 	}
 
-	public static void refreshTaskList(String[] tasks, GUIBuild gui, int questpoint) {
-		String[] t = new String[tasks.length];
-		System.out.println("amount of tasks: "+tasks.length);
+	public static void refreshTaskList(Quest quest, GUIBuild gui) {
+		String[] t = new String[ quest.getTasks().length ];
 		
-		t[0] = tasks[0];
+		for (int i = 0; i < quest.getCurrentTask(); i++){
+			t[i] = "\u2022 "+quest.getTasks()[i].getTaskPoint();
+		}
 		
 		gui.getTaskList().setListData(t);
 	}
