@@ -13,6 +13,7 @@ import javax.swing.JList;
 
 import net.teamwraith.wraithquest.Quest.QuestState;
 import net.teamwraith.wraithquest.Task.TaskState;
+
 public class AppGUI {
 	
 	private static List<String> activatedQuests;
@@ -28,6 +29,7 @@ public class AppGUI {
 		
 		gui.getButtonLink().addActionListener(new ActionListener(){
 
+			// Redirect player to video.
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				Desktop desktop = Desktop.getDesktop();
@@ -81,6 +83,7 @@ public class AppGUI {
 	}
 
 	public static void redirect(int index, Quest quest) {
+		System.out.println(index);
 		gui.getQuestList().setSelectedIndex(index);
 		refreshAll(quest);
 	}
@@ -100,7 +103,9 @@ public class AppGUI {
 			i++;
 			
 			// Assign task to the quest's current task.
-			Task task = quest.getTasks()[quest.getCurrentTask()];
+			Task task = quest.getTasks()[
+			    quest.getCurrentTask()+(0 < quest.getCurrentTask() ? -1 : 0) 
+			];
 			
 			// Check if the password is equal to the quest's current task.
 			if (password.equals(task.getPassword())) {
@@ -115,14 +120,12 @@ public class AppGUI {
 					quest.setState(QuestState.STARTED);
 				}
 
-				if (quest.getState() == QuestState.STARTED) {
-					if (!activatedQuests.contains(quest.getName())){
-						activatedQuests.add(quest.getName());
-					}
+				if (!activatedQuests.contains(quest.getName())){
+					activatedQuests.add(quest.getName());
 				}
 				
 				quest.setCurrentTask(quest.getCurrentTask()+1);
-				redirect(i,quest);
+				redirect(quest.getName());
 				break;
 			}
 		}
